@@ -1,0 +1,61 @@
+pip install django==1.8 -i  https://pypi.doubanio.com/simple
+
+初始化
+django-admin startproject test1
+python manage.py startapp booktest
+python manage.py makemigrations
+python manage.py migrations
+
+使用django shell 操作数据
+python manage.py shell
+b=BookInfo()
+b.btitle='abc'
+from datetime import datetime
+b.bpub_date=datetime(year=2019,month=10,day=23)
+b.save()
+
+查看数据
+BookInfo.objects.all()
+报错:
+TypeError: __str__ returned non-string (type bytes)
+原因:
+python2.7:
+return self.btitle.encode('utf-8')
+python3.6
+return self.btitle
+
+对于BookInfo.objects.all()调用的一个解释
+例子:
+print("Hello World")
+
+class Manage():
+    def all(self):
+        return "manage"
+
+class Person():
+    objects = Manage()
+
+    def __str__(self):
+        return "person"
+
+aaa=Person.objects.all()
+print(aaa)
+
+使用shell 查询
+>>> b=BookInfo.objects.get(pk=1)
+>>> b.btitle
+'abc'
+
+>>> b.delete()   
+>>> BookInfo.objects.all
+>>> BookInfo.objects.all()
+[]
+
+注意:delete方法,save方法都是继承models.Model
+
+创建管理员:
+python manage.py createsuperuser
+
+
+
+
