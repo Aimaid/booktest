@@ -56,6 +56,14 @@ print(aaa)
 创建管理员:
 python manage.py createsuperuser
 
+=================================================================
+setting 里面注册templates
+'DIRS': [os.path.join(BASE_DIR,'templates')],
 
+from django.template import RequestContext,loader
+from django.http import *
 
+def index(request):
+    temp=loader.get_template(''booktest/index.html'')   #加载模板
+    return HttpResponse(temp.render())                  #将模板内容返回到页面,渲染模板
 
